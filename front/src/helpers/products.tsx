@@ -1,6 +1,6 @@
 
 
-interface IProduct {
+export interface IProduct {
     name: string;
     price: number;
     description: string;
@@ -9,7 +9,7 @@ interface IProduct {
     stock: number;
   }
 
-  const productsTester: IProduct[] = [
+  const productsTester = [
     {
       name: "iPhone 11",
       price: 699,
@@ -32,29 +32,4 @@ interface IProduct {
     }
 ];
 
-
-
-
-let createOrder: {
-    userId: number,
-    products: number[]
-}
-
-let loginUser:{
-    email: string,
-    password: string
-}
-
-let registerUser:{
-    name: string,
-    email: string,
-    password: string,
-    address: string,
-    phone: string
-}
-
-
-
-
-
-
+export default productsTester;
