@@ -4,7 +4,7 @@ import Card from "../cardProduct/Card";
 
 const CardTemplate = ({products} : {products : IProduct[]} ) => {
     return(
-        <div>
+        <div className="p-1 flex flex-row">
         {products && products?.map((product)=>{
             return(
                 <Card key={product.categoryId} {...product}/>

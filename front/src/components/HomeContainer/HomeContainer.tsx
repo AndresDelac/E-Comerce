@@ -6,9 +6,9 @@ import CardTemplate from "../CardTemplate/CardTemplate";
 
 const HomeContainer = () => {
     return(
-        <div>
-            <CardTemplate products ={productsTester}/>
-        </div>
+        <main>
+            <CardTemplate products = {productsTester} />
+        </main>
     )
 }
 export default HomeContainer;
