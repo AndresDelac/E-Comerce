@@ -1,3 +1,4 @@
+import axios from "axios";
 
 
 export interface IProduct {
@@ -31,5 +32,12 @@ export interface IProduct {
       stock: 10,
     }
 ];
+
+export async function getProducts() {
+  const response = await axios.get("http://localhost:3000/products")
+  return response.data;
+}
+
+
 
 export default productsTester;
