@@ -2,13 +2,16 @@ import React from "react";
 import productsTester from "@/helpers/products";
 import Card from "../cardProduct/Card";
 import CardTemplate from "../CardTemplate/CardTemplate";
-import { getProducts } from "@/helpers/products";
+import { getproductsDB } from "@/helpers/petitions";
 
 
-const HomeContainer = () => {
+const HomeContainer = async () => {
+    const products = await getproductsDB();
     return(
-        <main>
-            <CardTemplate products = {productsTester} />
+        <main className="bg-black flex justify-between items-center w-[98%] mx-auto mt-1 mb-1 p-4">
+            <section>
+            <CardTemplate products = {products} />
+            </section>
         </main>
     )
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const CardTemplate = ({products} : {products : IProduct[]} ) => {
     return(
-        <div className="p-1 flex flex-row">
+        <div className="p-1 flex flex-row gap-4">
         {products && products?.map((product)=>{
             return(
                 <Link key={product.categoryId} href={`/productDetails/${product.categoryId}`}>
