@@ -13,3 +13,13 @@ export async function getproductsDB() {
         throw new Error(error)
     }
 }
+
+export async function getproductById(id: string) {
+    try {
+        const products = await getproductsDB()
+        const product = products.find((product) => product.id.toString() === id)
+        if(!product) throw new Error("Product not found")
+    } catch (error:any) {
+        throw new Error(error)
+    }
+}

@@ -1,30 +1,53 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import validate from "./validate";
 import Link from "next/link";
+import { IRegister, RegisterErrorProps, RegisterProps } from "@/types/types";
+import { useRouter } from "next/navigation";
+import { register } from "@/helpers/authHelper";
 
 export default function Register (){
+    const router = useRouter()
 
-    function handleSubmit(){
-        
-    }
-
+    const [formRegister, setFormRegister] = useState(false);
+    
     return(
         <section className="flex items-center justify-center min-h-screen bg-gray-300">
         <Formik
             initialValues={{
-                name: "",
                 email: "",
-                birthdate: "",
-                dni_number: "",
-                username: "",
                 password: "",
-                repeatPassword: "",
+                name: "",
+                address: "",
+                phone: "",
             }}
             validate={validate}
-            onSubmit={handleSubmit}>
+            onSubmit={(values : IRegister, { resetForm }) =>{
+                const dataUser : RegisterProps = {
+                name: values.name,
+                email: values.email,
+                password:  values.password,
+                address: values.address,
+                phone: values.phone,
+                };
+                register(dataUser)
+                .then((user)=> {
+                    console.log("User logged", user);
+                    setFormRegister(true)
+                    console.log(user);
+                    
+                    resetForm();
+                    setTimeout(()=> {
+                        router.push("/LoginView");
+                    }, 1000);
+                })
+                .catch((error)=> {
+                    console.log("Error while login", error);
+                    alert("Error while login" + error.message)
+                })
+            } }>
 
             {() => (
                 
@@ -38,34 +61,10 @@ export default function Register (){
                         
                 <h1 className="font-semibold text-2xl">Sign Up</h1>
 
-                <div className="py-4">
-                    <label htmlFor="name" className="mb-2 text-md">Name</label>
-                    <Field type="text" name="name" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="name" component="div" className="text-red-500" />
-                    </div>
-                    
                     <div className="py-4">
                     <label htmlFor="email">Email</label>
                     <Field type="email" name="email" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
                     <ErrorMessage name="email" component="div" className="text-red-500"/>
-                    </div>
-
-                    <div className="py-4">
-                    <label htmlFor="birthdate">Birthdate</label>
-                    <Field type="date" name="birthdate" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="birthdate" component="div" className="text-red-500"/>
-                    </div>
-
-                    <div className="py-4">
-                    <label htmlFor="dni_number">DNI</label>
-                    <Field type="number" name="dni_number" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="dni_number" component="div" className="text-red-500"/>        
-                    </div>
-
-                    <div className="py-4">
-                    <label htmlFor="username">Username</label>
-                    <Field type="text" name="username" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="username" component="div" className="text-red-500"/>
                     </div>
 
                     <div className="py-4">
@@ -74,20 +73,42 @@ export default function Register (){
                     <ErrorMessage name="password" component="div" className="text-red-500"/>
                     </div>
 
+                <div className="py-4">
+                    <label htmlFor="name" className="mb-2 text-md">Name</label>
+                    <Field type="text" name="name" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
+                    <ErrorMessage name="name" component="div" className="text-red-500" />
+                    </div>
+                    
+
                     <div className="py-4">
-                    <label htmlFor="repeatPassword">Repeat password</label>
-                    <Field type="password" name="repeatPassword" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="repeatPassword" component="div" className="text-red-500"/>
+                    <label htmlFor="address">Addres</label>
+                    <Field type="text" name="address" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
+                    <ErrorMessage name="address" component="div" className="text-red-500"/>
                     </div>
 
-                    <Link href={"/LoginView"}> 
-                    <div>
-                    <button type="submit" className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-cyan-700 hover:text-white
+
+                    <div className="py-4">
+                    <label htmlFor="phone">Phone</label>
+                    <Field type="number" name="phone" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
+                    <ErrorMessage name="phone" component="div" className="text-red-500"/>        
+                    </div>
+
+
+                    
+                    
+                    <button
+                    type="submit" 
+                    className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-cyan-700 hover:text-white
                     hover:border hover:border-gray-300 py-4 mt-5">
                         Register
-                        </button>
-                    </div>
-                    </Link>
+                    </button>
+                    
+
+                    {formRegister && (
+                <p className="text-center success">
+                  Usuario registrado con éxito!
+                </p>
+              )}
 
                     <div className="text-center text-gray-400">
                         Do you already have an account?
@@ -111,3 +132,4 @@ export default function Register (){
     </section>
     )
 }
+

@@ -1,29 +1,47 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import logInSchema from "./validate"
 import Link from "next/link";
 import EcommerceImg from "@/assets/E-commerce-1.jpg"
+import validate from "./validate";
+import { LoginProps } from "@/types/types";
+import { logIn } from "@/helpers/authHelper";
+import { useRouter } from "next/navigation";
 
 export default function LogIn(){
+    const router = useRouter();
 
-    function handleSubmit(){}
+    const [formLogin, setFormLogin] = useState(false);
     
     return(
         <section className="flex items-center justify-center min-h-screen bg-gray-300">
             <Formik
             initialValues={{
-                username: "",
+                email: "",
                 password: "",
-                repeatPassword: ""
             }}
-            validationSchema={logInSchema}
-            onSubmit={handleSubmit}>
+            validate={validate}
+            onSubmit={(values :LoginProps) => {
+                logIn(values)
+                .then((login)=>{
+                    console.log("User logged", login);
+                    setFormLogin(true);
+                    alert("User logged");
+                    const {token, user} = login;
+                    localStorage.setItem('userSession', JSON.stringify({token: token, user}))
+                    setTimeout(()=> {
+                        router.push("/");
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert(error);
+                })
+            }}>
 
                 {()=> (
-                    
-                    //RENDER
+                 
                 <div>
 
 
@@ -36,9 +54,9 @@ export default function LogIn(){
                     <h1 className="font-semibold text-2xl">Log In</h1>
                     
                     <div className="py-4">
-                    <label htmlFor="username" className="mb-2 text-md">Username</label>
-                    <Field type="text" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500" name="username"/>
-                    <ErrorMessage name="username" component="div" className="text-red-500"/>
+                    <label htmlFor="email" className="mb-2 text-md">Email</label>
+                    <Field type="text" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500" name="email"/>
+                    <ErrorMessage name="email" component="div" className="text-red-500"/>
                     </div>
 
                     <div className="py-4">                  
@@ -47,11 +65,6 @@ export default function LogIn(){
                     <ErrorMessage name="password" component="div" className="text-red-500"/>
                     </div>
 
-                    <div>
-                    <label htmlFor="repeatPassword" className="mb-2 text-md">Repeat password</label>
-                    <Field type="password" name="repeatPassword" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
-                    <ErrorMessage name="repeatPassword" component="div" className="text-red-500"/>
-                    </div>
 
                     <div>
                     <button type="submit" className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-cyan-700 hover:text-white
