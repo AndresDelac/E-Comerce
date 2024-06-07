@@ -4,7 +4,6 @@ import { getproductById } from "@/helpers/petitions";
 import { IProduct, userSession } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { json } from "stream/consumers";
 
 const DetailProduct = ({params}: {params:{productID: string}}) => {
     const router = useRouter()
@@ -49,16 +48,16 @@ const DetailProduct = ({params}: {params:{productID: string}}) => {
     
 
     return(
-        <div className="w-full items-center justify-center flex flex-col ">
-       <div className="w-1/2 items-center justify-center flex flex-col bg-gray-200 rounded my-4">
-            <h2> {product?.name}</h2>
-            <img src={product?.image} alt="imagen del producto" />
-            <p>{product?.description}</p>
-            <p>$ {product?.price}</p>
-            <p>Stock: {product?.stock}</p>
-            <button id={product?.id.toString()} onClick={handleAddToCart} className="rounded-sm bg-white hover:bg-gray-400 text-black p-4 mt-2">Buy now!</button>
+    <div className="w-full items-center justify-center flex flex-col ">
+       <div className="w-1/2 items-center justify-center flex flex-col bg-black rounded my-4 shadow-lg shadow-cyan-500 p-6">
+            <img src={product?.image} alt="imagen del producto" className="w-[460px] rounded-xl m-10"/>
+            <h1 className="text-cyan-400 text-[40px]"> {product?.name}</h1>
+            <p className="text-white mr-6 ml-6 mt-6 text-xl font-serif font-semibold ">{product?.description}</p>
+            <p className="text-green-400 mt-5 text-xl">Price: ${product?.price}</p>
+            <p className="text-white mt-5 text-xl ">Stock: {product?.stock}</p>
+            <button id={product?.id.toString()} onClick={handleAddToCart} className="rounded-xl bg-white hover:bg-cyan-300 text-black p-4 mt-2">Buy now!</button>
        </div>
-     </div>
+    </div>
     )
 
 }

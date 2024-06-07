@@ -15,7 +15,7 @@ export default function LogIn(){
     const [formLogin, setFormLogin] = useState(false);
     
     return(
-        <section className="flex items-center justify-center min-h-screen bg-gray-300">
+        <section className="flex items-center justify-center min-h-screen bg-black">
             <Formik
             initialValues={{
                 email: "",
@@ -31,7 +31,7 @@ export default function LogIn(){
                     const {token, user} = login;
                     localStorage.setItem('userSession', JSON.stringify({token: token, user}))
                     setTimeout(()=> {
-                        router.push("/");
+                        router.push("/dashboard");
                     }, 1000);
                 })
                 .catch((error) => {
@@ -46,37 +46,37 @@ export default function LogIn(){
 
 
                 <Form>
-                <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
+                <div className="relative flex flex-col m-6 space-y-8 bg-black shadow-lg rounded-2xl border border-white shadow-white md:flex-row md:space-y-0">
                     <div className="flex flex-col justify-center p-8 md:p-14">
-                        <span className="mb-3 text-4xl font-bold">Welcome Back!</span>
-                        <span className="font-light text-gray-500 mb-8">Please enter your details</span>
+                        <span className="mb-3 text-4xl font-bold text-white">Welcome Back!</span>
+                        <span className="font-light text-cyan-300 mb-8">Please enter your details</span>
                
-                    <h1 className="font-semibold text-2xl">Log In</h1>
+                    <h1 className="font-semibold text-2xl text-cyan-300">Log In</h1>
                     
                     <div className="py-4">
-                    <label htmlFor="email" className="mb-2 text-md">Email</label>
+                    <label htmlFor="email" className="mb-2 text-md text-white">Email</label>
                     <Field type="text" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500" name="email"/>
                     <ErrorMessage name="email" component="div" className="text-red-500"/>
                     </div>
 
                     <div className="py-4">                  
-                    <label htmlFor="password" className="mb-2 text-md">Password</label>
+                    <label htmlFor="password" className="mb-2 text-md text-white">Password</label>
                     <Field type="password" name="password" className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"/>
                     <ErrorMessage name="password" component="div" className="text-red-500"/>
                     </div>
 
 
                     <div>
-                    <button type="submit" className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-cyan-700 hover:text-white
-                    hover:border hover:border-gray-300 py-4 mt-5">
+                    <button type="submit" className="w-full bg-white text-black p-2 rounded-lg mb-6 hover:bg-cyan-500 hover:text-white
+                    hover:border hover:border-cyan-300 py-4 mt-5">
                         Log In
                         </button>
                     </div>
 
                     <div className="text-center text-gray-400">
-                        Dont` have an account?
+                        Doesn`t have an account?
                         <Link href={"/RegisterView"}>
-                        <span className="font-bold text-black">Sign Up for free!</span>
+                        <span className="font-bold text-cyan-300"> Sign Up for free!</span>
                         </Link>
                     </div>
 
@@ -85,11 +85,6 @@ export default function LogIn(){
                     src={EcommerceImg.src} 
                     alt="imgLogin" 
                     className="w-[400px] h-full hidden rounded-r-2xl md:block object-cover" />
-                    </div>
-
-                    <div className="absolute hidden bottom-10 right-6 p-6 text-center bg-white bg-opacity-30 backdrop-blur-sm rounded
-                     drop-shadow-lg md:block">
-                        <span className="text-gray-300 text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis sunt nesciunt, error esse consequuntur nobis consequatur.</span>
                     </div>
 
                     </div>

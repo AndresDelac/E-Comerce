@@ -41,13 +41,13 @@ export default function Navbar (){
                 </Link>
                 </li>
 
-
-
                 <li>
-                <Link href={"/shoppingCart"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
-                    Shopping cart
+                <Link href={"/"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
+                About us
                 </Link>
                 </li>
+
+
 
 
             </ul>
@@ -58,9 +58,15 @@ export default function Navbar (){
             userData?.token ? (
 
             <div className="mr-6 left-0 top-[9%] flex items-center px-1 gap-6">
+                
                 <Link href={"/dashboard"}>
                 <p className=" rounded-lg bg-[#373737] p-2 text-xl text-white">{userData?.user.name}</p>
                 </Link>
+
+                <Link href={"/shoppingCart"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
+                    Shopping cart
+                </Link>
+                
                 <button className="bg-[#373737] text-white p-2 rounded-lg  hover:bg-cyan-500">Log Out</button>
             </div>
             ) : (
