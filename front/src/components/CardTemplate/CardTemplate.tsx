@@ -9,7 +9,9 @@ const CardTemplate = ({products} : {products : IProduct[]} ) => {
         {products && products?.map((product)=>{
             return(
                 <Link key={product.categoryId} href={`/productDetails/${product.categoryId}`}>
+
                 <Card key={product.categoryId} {...product}/>
+                
                 </Link>
             )
         })}

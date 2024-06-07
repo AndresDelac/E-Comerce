@@ -3,8 +3,5 @@
 @tailwind utilities;
 
 body{
-    background: url(https://pivigames.blog/wp-content/uploads/2020/04/game_pattern.png);
-    background-color: rgb(79, 79, 79);
-    background-repeat: repeat;
-
+    background-color: rgb(0, 0, 0);
 }

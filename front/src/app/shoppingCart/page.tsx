@@ -1,12 +1,85 @@
-import React from "react";
+'use client'
 
-const page = () => {
+import { createOrder } from "@/helpers/ordersHelper";
+import { IProduct, userSession } from "@/types/types";
+import { redirect, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+
+
+const Cart = () => {
+    const [cart, setCart] = useState<IProduct[]>([]);
+    const [totalCart, setTotalCart] = useState<number>(0)
+    const [userData, setUserData] = useState<userSession>();
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.localStorage){
+            const userData: userSession = JSON.parse(localStorage.getItem("userSession")!)
+            setUserData(userData)
+            !userData?.token && redirect("/LoginView")
+        }
+
+        const storedCart = JSON.parse(localStorage.getItem("cart") || "[]")
+        if(storedCart){
+            // logica para hacer la suma total de los precios.
+            let totalCart = 0;
+            storedCart?.map((item: IProduct) => {
+                totalCart = totalCart + item.price
+            })
+            setTotalCart(totalCart)
+            setCart(storedCart)
+        }
+    }, [])
+    
+    const handleClick = async () => {
+
+            const idProducts = new Set(cart.map((product) => product.id))
+            await createOrder(Array.from(idProducts), userData?.token!)
+
+            alert("buy succesfully")
+            setCart([])
+            setTotalCart(0)
+            localStorage.setItem("cart", "[]");
+
+       
+    }
+    
+
     return(
-        <div>
-        <h1>Este es el Shopping cart</h1>
+        // justify-around  para hacer q esten un poco mas cerca
+        <div className="bg-white flex flex-row items-center w-full justify-between gap-4 px-4">
+
+            <div className="flex flex-col gap-4 ">
+            {
+                    cart?.length > 0 ? (
+                        cart?.map((cart) => {
+                            return(
+                                <div key={cart.id}>
+                                    <div>
+                                        <p>{cart.name}</p>
+                                       <p>Price: ${cart.price}</p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <div>
+                            <p>
+                            You dont have any products in your cart yet
+                            </p> 
+                          
+                        </div>
+                    )
+                }
+            </div>
+
+            <div>
+                <p>Total: ${totalCart}</p>
+                <button onClick={handleClick} className="rounded-sm bg-red-500 hover:bg-white text-black p-2 mt-2">Checkout</button>
+            </div>
+
      </div>
     )
 
 }
 
-export default page;
+export default Cart;
