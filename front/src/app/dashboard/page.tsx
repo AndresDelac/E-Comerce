@@ -19,7 +19,7 @@ const Dashboard = () => {
     return(
     <div className="w-full h-screen flex flex-col items-center">
 
-        <div className="border rounded-lg border-cyan-500 mt-28 items-center max-w-[760px] w-[660px]">
+        <div className="border rounded-lg border-cyan-500 shadow-md shadow-cyan-500 mt-28 items-center max-w-[760px] w-[660px]">
             <p className="text-white mx-auto text-2xl p-4 items-center font-serif">Hello {userData?.user.name}, this section its your dashboard, you can view all your private information about your account like your addres or phone number. The orders you have make its in the section "Orders" </p>
         </div>
 

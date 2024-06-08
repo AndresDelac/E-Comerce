@@ -27,8 +27,10 @@ const OrdersPage = () => {
     
 
     return(
-        <div className=" flex flex-col items-center justify-center text-white text-lg">
+        <div className=" flex flex-col items-center justify-center text-white">
+            <h1 className="text-2xl m-10">
             My Orders
+            </h1>
 
             <div>
                 {
@@ -36,9 +38,9 @@ const OrdersPage = () => {
                         orders?.map((order) => {
                             return(
                                 <div key={order.id}>
-                                    <div>
+                                    <div className="text-xl">                     
                                         <p>{new Date(order.date).toLocaleDateString()}</p>
-                                        <p>Status: {order.status}</p>
+                                        <p className="text-green-500">Status: {order.status}</p>          
                                     </div>
                                 </div>
                             )

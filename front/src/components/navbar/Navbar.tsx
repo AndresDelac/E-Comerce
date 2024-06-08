@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import logoT from '@/assets/logoT.svg'
+import imgUser from "@/assets/img-user.png"
+import imgCart from "@/assets/img-cart.png"
 import { userSession } from "@/types/types";
 import { usePathname } from "next/navigation";
 
@@ -42,7 +44,7 @@ export default function Navbar (){
                 </li>
 
                 <li>
-                <Link href={"/"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
+                <Link href={"/aboutUs"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
                 About us
                 </Link>
                 </li>
@@ -60,11 +62,12 @@ export default function Navbar (){
             <div className="mr-6 left-0 top-[9%] flex items-center px-1 gap-6">
                 
                 <Link href={"/dashboard"}>
-                <p className=" rounded-lg bg-[#373737] p-2 text-xl text-white">{userData?.user.name}</p>
+                <img src={imgUser.src} alt="" className="hover:shadow-lg hover:shadow-cyan-500 w-[80px] h-[60px]"/>
+                {/* <p className=" rounded-lg bg-[#373737] p-2 text-xl text-white">{userData?.user.name}</p> */}
                 </Link>
 
-                <Link href={"/shoppingCart"} className="hover:text-cyan-500 p-2 rounded-lg  bg-[#373737]">
-                    Shopping cart
+                <Link href={"/shoppingCart"} className="hover:text-cyan-500 p-2">
+                    <img src={imgCart.src} alt="" className="hover:shadow-lg hover:shadow-cyan-500 w-[80px] h-[60px]" />
                 </Link>
                 
                 <button className="bg-[#373737] text-white p-2 rounded-lg  hover:bg-cyan-500">Log Out</button>
@@ -72,7 +75,7 @@ export default function Navbar (){
             ) : (
                 <div>
                      <Link href={"/LoginView"}>
-                <button className="bg-black text-white p-2 rounded-lg  hover:bg-cyan-500">
+                <button className="bg-[#373737] text-white p-2 rounded-lg hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-300 px-3 mr-6">
                     Log In
                 </button>
                 </Link>

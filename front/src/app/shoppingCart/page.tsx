@@ -46,7 +46,7 @@ const Cart = () => {
 
     return(
         // justify-around  para hacer q esten un poco mas cerca
-        <div className="bg-white flex flex-row items-center w-full justify-between gap-4 px-4">
+        <div className="bg-black flex flex-row items-center w-full justify-around gap-4 px-4 ">
 
             <div className="flex flex-col gap-4 ">
             {
@@ -55,8 +55,10 @@ const Cart = () => {
                             return(
                                 <div key={cart.id}>
                                     <div>
-                                        <p>{cart.name}</p>
-                                       <p>Price: ${cart.price}</p>
+                                        <li>
+                                        <p className="text-white text-2xl">{cart.name}</p>
+                                       <p className="text-green-600">Price: ${cart.price}</p>
+                                       </li>
                                     </div>
                                 </div>
                             )
@@ -73,8 +75,8 @@ const Cart = () => {
             </div>
 
             <div>
-                <p>Total: ${totalCart}</p>
-                <button onClick={handleClick} className="rounded-sm bg-red-500 hover:bg-white text-black p-2 mt-2">Checkout</button>
+                <p className="text-cyan-400 text-lg">Total: ${totalCart}</p>
+                <button onClick={handleClick} className="rounded-sm bg-red-500 hover:bg-green-500 text-black p-2 mt-2">Checkout</button>
             </div>
 
      </div>
