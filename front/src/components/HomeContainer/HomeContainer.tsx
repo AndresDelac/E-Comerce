@@ -12,8 +12,8 @@ const HomeContainer = async () => {
     return(
         <main className="bg-black flex justify-between items-center w-[98%] mx-auto mt-1 mb-1 p-4">
             <section>
-            <CarouselFlow/>
-                {/* <CarouselMejorado images={imagesToPreload}/> */}
+           
+              
             <CardTemplate products = {products} />
             </section>
         </main>
